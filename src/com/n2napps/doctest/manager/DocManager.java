@@ -1,7 +1,9 @@
-package com.n2napps.test;
+package com.n2napps.doctest.manager;
 
 import java.io.File;
 import java.util.List;
+
+import com.n2napps.doctest.FieldValues;
 
 
 public class DocManager {

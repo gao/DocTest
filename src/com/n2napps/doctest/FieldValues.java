@@ -1,4 +1,4 @@
-package com.n2napps.test;
+package com.n2napps.doctest;
 
 
 public class FieldValues {
