@@ -30,6 +30,7 @@ public class DocManagerSimpleTest {
       assertEquals("other field is address",fileds.get(1).getName(),"address");
     }
     
+
     @Test
     public void testFillAndSave() throws Docx4JException {
       String inputFileString = "src/test/resources/DocManager/01_simple.docx";
