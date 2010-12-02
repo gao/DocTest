@@ -13,14 +13,15 @@ import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.wml.Body;
 import org.docx4j.wml.Text;
 
+import com.n2napps.doctest.Field;
 import com.n2napps.doctest.FieldValues;
 
 
 public class DocManager {
     
-public List<FieldValues> getFields(File docxFile) throws Docx4JException{
+public List<Field> getFields(File docxFile) throws Docx4JException{
     	
-    	final List<FieldValues> fieldValues = new ArrayList<FieldValues>();
+    	final List<Field> fields = new ArrayList<Field>();
     	
     	WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile);
 		MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
@@ -72,18 +73,18 @@ public List<FieldValues> getFields(File docxFile) throws Docx4JException{
 							textList.add(text);
 							if(text.getValue().indexOf("}")>=0){
 								String fieldName = getFieldName(textList);
-								FieldValues f = new FieldValues();
+								Field f = new Field();
 								f.setName(fieldName);
-								fieldValues.add(f);
+								fields.add(f);
 								textList.clear();
 							}
 						}else if(textList.size()>0){
 							textList.add(text);
 							if(text.getValue().indexOf("}")>=0){
 								String fieldName = getFieldName(textList);
-								FieldValues f = new FieldValues();
+								Field f = new Field();
 								f.setName(fieldName);
-								fieldValues.add(f);
+								fields.add(f);
 								textList.clear();
 							}
 							
@@ -108,7 +109,7 @@ public List<FieldValues> getFields(File docxFile) throws Docx4JException{
 			}
 
 		);
-		return fieldValues;
+		return fields;
      }
     
     public void fillAndSave(File docxFile, File destinationDocxFile, final List<FieldValues> values) throws Docx4JException{
