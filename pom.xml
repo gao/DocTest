@@ -1,26 +1,26 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.n2napps</groupId>
-  <artifactId>doctest</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0.1</version>
-  <name>Docx test</name>
-  <url>http://maven.apache.org</url>
-  
-  <build>
-    <finalName>DocTest</finalName>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+  http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.n2napps.doctest</groupId>
+   <artifactId>DocTest</artifactId>
+   <packaging>jar</packaging>
+   <version>1.0-SNAPSHOT</version>
+   <name>Docx Test</name>
+   <url>http://maven.apache.org</url>
+   
+   <build>
+    <finalName>${artifactId}-${version}</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
-          <!-- Temporary fix for supporting aspectJ -->
           <failOnError>false</failOnError>
         </configuration>
       </plugin>
-
       
       <!-- Clean & Copy .jar file to /bin/lib -->
       <plugin>
@@ -59,95 +59,40 @@
       <!-- /Clean & Copy  .jar file to /bin/lib -->
       
     </plugins>
-  </build>
-  
-  <dependencies>
-    <!-- Provided Dependencies -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.0</version>
-      <scope>provided</scope>
-    </dependency>
-    
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
-      <scope>provided</scope>
-    </dependency>
-    <!-- /Provided Dependencies -->
-    
-    <dependency>
-      <groupId>org.snowfk</groupId>
-      <artifactId>snow</artifactId>
-      <version>1.1.5</version>
-    </dependency>
-    
-    
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.6.1</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.6.1</version>
-    </dependency>
-    
-    <dependency>
+   </build>
+   
+   <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.0</version>
+        <scope>provided</scope>
+      </dependency>
+      
+      <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
         <version>1.2.14</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>com.googlecode.gentyref</groupId>
-      <artifactId>gentyref</artifactId>
-      <version>1.1.0</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>net.sf.ehcache</groupId>
-      <artifactId>ehcache-core</artifactId>
-      <version>1.7.2</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>docx4j</groupId>
-      <artifactId>docx4j</artifactId>
-      <version>2.6.0</version>
-    </dependency>
-    
-  </dependencies>
-  
-  
+      </dependency>
+	
+    <!-- 
+      <dependency>
+        <groupId>docx4j</groupId>
+        <artifactId>docx4j</artifactId>
+        <version>2.6.0</version>
+      </dependency>
+    -->
+   </dependencies>
+   
+     
   <!-- Repositories -->
   <repositories>
-    <repository>
-      <id>jboss-repository-group</id>
-      <name>jboss-repository-group</name>
-      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-      <layout>default</layout>
-    </repository>
-    
-    <repository>
-      <id>ibiblio</id>
-      <url>http://www.ibiblio.org/maven</url>
-    </repository>
-    
-    <repository>
-      <id>snowfk.org</id>
-      <url>http://mvnrep.snowfk.org/snowfk</url>
-    </repository>
-    
     <repository>
       <id>docx4j</id>
       <url>http://dev.plutext.org/trac/docx4j/browser/trunk/docx4j/m2/org</url>
     </repository>
   </repositories>
   <!-- /Repositories -->
-  
-</project>
+</project> 
+
+
