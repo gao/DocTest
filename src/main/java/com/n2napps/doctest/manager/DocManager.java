@@ -73,18 +73,22 @@ public List<Field> getFields(File docxFile) throws Docx4JException{
 							textList.add(text);
 							if(text.getValue().indexOf("}")>=0){
 								String fieldName = getFieldName(textList);
-								Field f = new Field();
-								f.setName(fieldName);
-								fields.add(f);
+								if(!checkFieldName(fieldName,fields)){
+								    Field f = new Field();
+	                                f.setName(fieldName);
+								    fields.add(f);
+								}
 								textList.clear();
 							}
 						}else if(textList.size()>0){
 							textList.add(text);
 							if(text.getValue().indexOf("}")>=0){
 								String fieldName = getFieldName(textList);
-								Field f = new Field();
-								f.setName(fieldName);
-								fields.add(f);
+								if(!checkFieldName(fieldName,fields)){
+                                    Field f = new Field();
+                                    f.setName(fieldName);
+                                    fields.add(f);
+                                }
 								textList.clear();
 							}
 							
@@ -105,6 +109,16 @@ public List<Field> getFields(File docxFile) throws Docx4JException{
 					}
 					return fieldName.substring(2, fieldName.length()-1);
 				}
+				
+				private boolean checkFieldName(String filedName,List<Field> fields){
+                    boolean isHave = false;
+				    for(int i=0;i<fields.size();i++){
+				        if(fields.get(i).getName().equals(filedName)){
+				            isHave = true;
+				        }
+                    }
+				    return isHave;
+                }
 	
 			}
 
