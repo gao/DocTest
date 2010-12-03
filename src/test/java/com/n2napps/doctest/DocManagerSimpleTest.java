@@ -3,14 +3,8 @@ package com.n2napps.doctest;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import org.docx4j.XmlUtils;
-import org.docx4j.openpackaging.io.SaveToZipFile;
-import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.wml.Document;
 import org.junit.Test;
 
 import com.n2napps.doctest.manager.DocManager;
