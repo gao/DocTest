@@ -104,5 +104,17 @@ public class DocManagerSimpleTest {
 
       manager.fillAndSave(inputFile, outputFile, fieldvalues);
     }
+    
+    @Test
+    public void testDocxToHtml() throws Exception {
+      String inputFileString = "src/test/resources/DocManager/01_simple.docx";
+      
+      File inputFile = new File(inputFileString);
+      DocManager manager = new DocManager();
+      
+      //docx to html
+      manager.docxToHtml(inputFile);
+      
+    }
 
 }
