@@ -1,12 +1,15 @@
 package com.n2napps.doctest.manager;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.docx4j.TraversalUtil;
 import org.docx4j.XmlUtils;
 import org.docx4j.TraversalUtil.Callback;
+import org.docx4j.convert.out.html.AbstractHtmlExporter;
+import org.docx4j.convert.out.html.HtmlExporterNG2;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
@@ -235,5 +238,18 @@ public List<Field> getFields(File docxFile) throws Docx4JException{
 		
 		wordMLPackage.save(destinationDocxFile);
      }
+    
+    public void docxToHtml(File docxFile) throws Exception{                 
+        // Load .docx
+        //this need : commons-io-1.3.1.jar commons-logging-1.1.1.jar serializer-2.7.1.jar xalan-2.7.1.jar
+        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile); 
+        AbstractHtmlExporter exporter = new HtmlExporterNG2();                        
+                          
+        OutputStream os = new java.io.FileOutputStream(System.getProperty("user.dir") + "/tmp/test.html"); 
+                          
+        javax.xml.transform.stream.StreamResult result = new javax.xml.transform.stream.StreamResult(os); 
+        exporter.html(wordMLPackage, result,System.getProperty("user.dir") + "/tmp/test_files"); 
+        
+    }
 
 }
