@@ -239,16 +239,16 @@ public List<Field> getFields(File docxFile) throws Docx4JException{
 		wordMLPackage.save(destinationDocxFile);
      }
     
-    public void docxToHtml(File docxFile) throws Exception{                 
+    public void docxToHtml(File docxFile,String outputFileString) throws Exception{                 
         // Load .docx
         //this need : commons-io-1.3.1.jar commons-logging-1.1.1.jar serializer-2.7.1.jar xalan-2.7.1.jar
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile); 
         AbstractHtmlExporter exporter = new HtmlExporterNG2();                        
                           
-        OutputStream os = new java.io.FileOutputStream(System.getProperty("user.dir") + "/tmp/test.html"); 
+        OutputStream os = new java.io.FileOutputStream(outputFileString+"testDocToHtml.html"); 
                           
         javax.xml.transform.stream.StreamResult result = new javax.xml.transform.stream.StreamResult(os); 
-        exporter.html(wordMLPackage, result,System.getProperty("user.dir") + "/tmp/test_files"); 
+        exporter.html(wordMLPackage, result,outputFileString+"test_files"); 
         
     }
 
