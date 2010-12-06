@@ -33,7 +33,7 @@ public class FormManagerSimpleTest {
     @Test
     public void testFillAndSave() throws Docx4JException {
       String inputFileString = "src/test/resources/DocManager/01_simple.docx";
-      String outputFileString = "src/test/resources/DocManager/output/01_simple_test.docx";
+      String outputFileString = "tmp/test/DocManager/output/01_simple_test.docx";
       
       File inputFile = new File(inputFileString);
       File outputFile = new File(outputFileString);
@@ -79,7 +79,7 @@ public class FormManagerSimpleTest {
     @Test
     public void testFillAndSaveHaveSameField() throws Docx4JException {
       String inputFileString = "src/test/resources/DocManager/02_redundant_field.docx";
-      String outputFileString = "src/test/resources/DocManager/output/02_redundant_field_test.docx";
+      String outputFileString = "tmp/test/DocManager/output/02_redundant_field_test.docx";
       
       File inputFile = new File(inputFileString);
       File outputFile = new File(outputFileString);

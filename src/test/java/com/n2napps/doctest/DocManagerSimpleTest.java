@@ -14,7 +14,7 @@ public class DocManagerSimpleTest {
     @Test
     public void testDocxToHtml() throws Exception {
       String inputFileString = "src/test/resources/DocManager/01_simple.docx";
-      String outputFileString = "src/test/resources/DocManager/output/";
+      String outputFileString = "tmp/test/DocManager/output/";
       
       File inputFile = new File(inputFileString);
       DocManager manager = new DocManager();
@@ -28,7 +28,7 @@ public class DocManagerSimpleTest {
     @Test
     public void testReplace() throws Exception {
         String inputFileString = "src/test/resources/DocManager/03_replace.docx";
-        String outputFileString = "src/test/resources/DocManager/output/03_replace_test.docx";
+        String outputFileString = "tmp/test/DocManager/output/03_replace_test.docx";
       
         File inputFile = new File(inputFileString);
         DocManager manager = new DocManager();
