@@ -19,7 +19,7 @@ public class DocManagerSimpleTest {
     @Test
     public void testDocxToHtml() throws Exception {
         //create the output folder if not exist
-        FolderUtils.newFolder("\\tmp\\test\\DocManager\\output");
+        FolderUtils.newFolder("/tmp/test/DocManager/output");
       
         String inputFilePath = "src/test/resources/DocManager/01_simple.docx";
         String outputFilePath = "tmp/test/DocManager/output/";
@@ -40,7 +40,7 @@ public class DocManagerSimpleTest {
     @Test
     public void testReplace() throws Exception {
         //create the output folder if not exist
-        FolderUtils.newFolder("\\tmp\\test\\DocManager\\output");
+        FolderUtils.newFolder("/tmp/test/DocManager/output");
         
         String inputFilePath = "src/test/resources/DocManager/03_replace.docx";
         String outputFilePath = "tmp/test/DocManager/output/03_replace_test.docx";
