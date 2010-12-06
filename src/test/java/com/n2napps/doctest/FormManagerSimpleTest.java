@@ -10,6 +10,7 @@ import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.junit.Test;
 
 import com.n2napps.doctest.manager.FormManager;
+import com.n2napps.doctest.utils.FolderUtils;
 
 public class FormManagerSimpleTest {
     
@@ -32,6 +33,9 @@ public class FormManagerSimpleTest {
 
     @Test
     public void testFillAndSave() throws Docx4JException {
+      //create the output folder if not exist
+        FolderUtils.newFolder("\\tmp\\test\\DocManager\\output");
+      
       String inputFileString = "src/test/resources/DocManager/01_simple.docx";
       String outputFileString = "tmp/test/DocManager/output/01_simple_test.docx";
       
@@ -78,6 +82,9 @@ public class FormManagerSimpleTest {
     
     @Test
     public void testFillAndSaveHaveSameField() throws Docx4JException {
+      //create the output folder if not exist
+      FolderUtils.newFolder("\\tmp\\test\\DocManager\\output");
+      
       String inputFileString = "src/test/resources/DocManager/02_redundant_field.docx";
       String outputFileString = "tmp/test/DocManager/output/02_redundant_field_test.docx";
       

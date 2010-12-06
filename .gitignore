@@ -5,4 +5,4 @@ build.xml
 target
 bin
 dep
-tmp/test/DocManager/output/files
+tmp/test/DocManager/output/

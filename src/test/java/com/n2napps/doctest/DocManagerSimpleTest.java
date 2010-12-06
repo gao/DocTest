@@ -8,25 +8,32 @@ import java.util.List;
 import org.junit.Test;
 
 import com.n2napps.doctest.manager.DocManager;
+import com.n2napps.doctest.utils.FolderUtils;
 
 public class DocManagerSimpleTest {
     
     @Test
     public void testDocxToHtml() throws Exception {
-      String inputFileString = "src/test/resources/DocManager/01_simple.docx";
-      String outputFileString = "tmp/test/DocManager/output/";
+        //create the output folder if not exist
+        FolderUtils.newFolder("\\tmp\\test\\DocManager\\output");
       
-      File inputFile = new File(inputFileString);
-      DocManager manager = new DocManager();
+        String inputFileString = "src/test/resources/DocManager/01_simple.docx";
+        String outputFileString = "tmp/test/DocManager/output/";
       
-      //docx to html
-      manager.docxToHtml(inputFile,outputFileString);
+        File inputFile = new File(inputFileString);
+        DocManager manager = new DocManager();
+      
+        //docx to html
+        manager.docxToHtml(inputFile,outputFileString);
       
     }
     
     
     @Test
     public void testReplace() throws Exception {
+        //create the output folder if not exist
+        FolderUtils.newFolder("\\tmp\\test\\DocManager\\output");
+        
         String inputFileString = "src/test/resources/DocManager/03_replace.docx";
         String outputFileString = "tmp/test/DocManager/output/03_replace_test.docx";
       
