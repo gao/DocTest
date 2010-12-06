@@ -15,100 +15,107 @@ import com.n2napps.doctest.utils.FolderUtils;
 public class FormManagerSimpleTest {
     
     //use the file 01_simple.docx,have ${name} and ${address}
+    /**
+     * this method is for method getFields
+     */
     @Test
     public void testGetFields() throws Docx4JException {
-      String inputFileString = "src/test/resources/DocManager/01_simple.docx";
+        String inputFilePath = "src/test/resources/DocManager/01_simple.docx";
       
-      File inputFile = new File(inputFileString);
-      FormManager manager = new FormManager();
+        File inputFile = new File(inputFilePath);
+        FormManager manager = new FormManager();
       
-      //get fields
-      List<Field> fileds = manager.getFields(inputFile);
+        //get fields
+        List<Field> fileds = manager.getFields(inputFile);
       
-      assertEquals("fileds size is 2",2, fileds.size());
-      assertEquals("one field is name",fileds.get(0).getName(),"name");
-      assertEquals("other field is address",fileds.get(1).getName(),"address");
+        assertEquals("fileds size is 2",2, fileds.size());
+        assertEquals("one field is name",fileds.get(0).getName(),"name");
+        assertEquals("other field is address",fileds.get(1).getName(),"address");
     }
     
 
+    /**
+     * this test is for the method fillAndSave
+     * @throws Docx4JException
+     */
     @Test
     public void testFillAndSave() throws Docx4JException {
-      //create the output folder if not exist
+        //create the output folder if not exist
         FolderUtils.newFolder("\\tmp\\test\\DocManager\\output");
       
-      String inputFileString = "src/test/resources/DocManager/01_simple.docx";
-      String outputFileString = "tmp/test/DocManager/output/01_simple_test.docx";
+        String inputFilePath = "src/test/resources/DocManager/01_simple.docx";
+        String outputFilePath = "tmp/test/DocManager/output/01_simple_test.docx";
       
-      File inputFile = new File(inputFileString);
-      File outputFile = new File(outputFileString);
-      FormManager manager = new FormManager();
+        File inputFile = new File(inputFilePath);
+        File outputFile = new File(outputFilePath);
+        FormManager manager = new FormManager();
       
-      //get fields
-      List<Field> fileds = manager.getFields(inputFile);
+        //get fields
+        List<Field> fileds = manager.getFields(inputFile);
       
-      assertEquals("values size is 2",2, fileds.size());
-      assertEquals("one field is name",fileds.get(0).getName(),"name");
-      assertEquals("other field is address",fileds.get(1).getName(),"address");
+        assertEquals("values size is 2",2, fileds.size());
+        assertEquals("one field is name",fileds.get(0).getName(),"name");
+        assertEquals("other field is address",fileds.get(1).getName(),"address");
       
-      List<FieldValues> fieldvalues = new ArrayList<FieldValues>();
-      for(Field filed : fileds){
-          FieldValues fv = new FieldValues();
-          fv.setName(filed.getName());
-          fv.setValue(filed.getName()+"value");
-          fieldvalues.add(fv);
-      }
+        List<FieldValues> fieldvalues = new ArrayList<FieldValues>();
+        for(Field filed : fileds){
+            FieldValues fv = new FieldValues();
+            fv.setName(filed.getName());
+            fv.setValue(filed.getName()+"value");
+            fieldvalues.add(fv);
+        }
 
-      manager.fillAndSave(inputFile, outputFile, fieldvalues);
+        manager.fillAndSave(inputFile, outputFile, fieldvalues);
     }
     
     
     //use the file 02_redundant_field.docx,have 2 ${name} 2 ${address} and 1 ${phone}
     @Test
     public void testGetFieldsHaveSameField() throws Docx4JException {
-      String inputFileString = "src/test/resources/DocManager/02_redundant_field.docx";
+        String inputFilePath = "src/test/resources/DocManager/02_redundant_field.docx";
       
-      File inputFile = new File(inputFileString);
-      FormManager manager = new FormManager();
+        File inputFile = new File(inputFilePath);
+        FormManager manager = new FormManager();
       
-      //get fields
-      List<Field> fileds = manager.getFields(inputFile);
+        //get fields
+        List<Field> fileds = manager.getFields(inputFile);
       
-      assertEquals("fileds size is 3",3, fileds.size());
-      assertEquals("one field is name",fileds.get(0).getName(),"name");
-      assertEquals("other field is address",fileds.get(1).getName(),"address");
-      assertEquals("other field is phone",fileds.get(2).getName(),"phone");
+        assertEquals("fileds size is 3",3, fileds.size());
+        assertEquals("one field is name",fileds.get(0).getName(),"name");
+        assertEquals("other field is address",fileds.get(1).getName(),"address");
+        assertEquals("other field is phone",fileds.get(2).getName(),"phone");
     }
     
     
     @Test
     public void testFillAndSaveHaveSameField() throws Docx4JException {
-      //create the output folder if not exist
-      FolderUtils.newFolder("\\tmp\\test\\DocManager\\output");
+        //create the output folder if not exist
+        FolderUtils.newFolder("\\tmp\\test\\DocManager\\output");
       
-      String inputFileString = "src/test/resources/DocManager/02_redundant_field.docx";
-      String outputFileString = "tmp/test/DocManager/output/02_redundant_field_test.docx";
+        String inputFilePath = "src/test/resources/DocManager/02_redundant_field.docx";
+        String outputFilePath = "tmp/test/DocManager/output/02_redundant_field_test.docx";
       
-      File inputFile = new File(inputFileString);
-      File outputFile = new File(outputFileString);
-      FormManager manager = new FormManager();
+        File inputFile = new File(inputFilePath);
+        File outputFile = new File(outputFilePath);
+        FormManager manager = new FormManager();
       
-      //get fields
-      List<Field> fileds = manager.getFields(inputFile);
+        //get fields
+        List<Field> fileds = manager.getFields(inputFile);
       
-      assertEquals("fileds size is 3",3, fileds.size());
-      assertEquals("one field is name",fileds.get(0).getName(),"name");
-      assertEquals("other field is address",fileds.get(1).getName(),"address");
-      assertEquals("other field is phone",fileds.get(2).getName(),"phone");
+        assertEquals("fileds size is 3",3, fileds.size());
+        assertEquals("one field is name",fileds.get(0).getName(),"name");
+        assertEquals("other field is address",fileds.get(1).getName(),"address");
+        assertEquals("other field is phone",fileds.get(2).getName(),"phone");
       
-      List<FieldValues> fieldvalues = new ArrayList<FieldValues>();
-      for(Field filed : fileds){
-          FieldValues fv = new FieldValues();
-          fv.setName(filed.getName());
-          fv.setValue(filed.getName()+"value");
-          fieldvalues.add(fv);
-      }
+        List<FieldValues> fieldvalues = new ArrayList<FieldValues>();
+        for(Field filed : fileds){
+            FieldValues fv = new FieldValues();
+            fv.setName(filed.getName());
+            fv.setValue(filed.getName()+"value");
+            fieldvalues.add(fv);
+        }
 
-      manager.fillAndSave(inputFile, outputFile, fieldvalues);
+        manager.fillAndSave(inputFile, outputFile, fieldvalues);
     }
 
 }

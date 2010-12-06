@@ -20,7 +20,12 @@ import org.docx4j.wml.Document;
 
 public class DocManager {
     
-    
+    /***
+     * this method is change .docx to .html file
+     * @param docxFile
+     * @param outputFileString
+     * @throws Exception
+     */
     public void docxToHtml(File docxFile,String outputFileString) throws Exception{                 
         // Load .docx
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile); 
@@ -33,7 +38,15 @@ public class DocManager {
         
     }
     
-    
+    /***
+     * this method is replace the ${name} to the given value in the docxFile
+     * @param docxFile
+     * @param outputFileString
+     * @param textToReplace
+     * @param newText
+     * @throws Docx4JException
+     * @throws JAXBException
+     */
     public void replace(File docxFile,String outputFileString ,List<String> textToReplace,List<String> newText) throws Docx4JException, JAXBException{
         boolean save = true;
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile);           

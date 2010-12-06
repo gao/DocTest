@@ -18,7 +18,13 @@ import com.n2napps.doctest.FieldValues;
 
 public class FormManager extends DocManager{
     
-public List<Field> getFields(File docxFile) throws Docx4JException{
+    /***
+     * this method get the name of ${name} in the docxFile
+     * @param docxFile
+     * @return
+     * @throws Docx4JException
+     */
+    public List<Field> getFields(File docxFile) throws Docx4JException{
         
         final List<Field> fields = new ArrayList<Field>();
         
@@ -126,6 +132,13 @@ public List<Field> getFields(File docxFile) throws Docx4JException{
      }
 
 
+    /***
+     * this method is to change the set the value of ${name} in the docxFile
+     * @param docxFile
+     * @param destinationDocxFile
+     * @param values
+     * @throws Docx4JException
+     */
     public void fillAndSave(File docxFile, File destinationDocxFile, final List<FieldValues> values) throws Docx4JException{
         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile);
         MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
