@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBException;
 
@@ -64,6 +65,39 @@ public class DocManager {
           
         //valorize template
         Object obj = XmlUtils.unmarshallFromTemplate(xml, mappings);
+            
+        //change  JaxbElement
+        documentPart.setJaxbElement((Document) obj);
+
+        // Save it        
+        if (save) {     
+            SaveToZipFile saver = new SaveToZipFile(wordMLPackage);
+            saver.save(outputFileString);
+            System.out.println( "Saved output to:" + outputFileString );
+        } else {
+            // Display the Main Document Part.
+        }
+    }
+    
+    /***
+     * this method is replace ${name} by the value
+     * @param docxFile
+     * @param outputFileString
+     * @param nameValue
+     * @throws Docx4JException
+     * @throws JAXBException
+     */
+    public void replaceValues(File docxFile,String outputFileString ,HashMap<String, String> nameValue) throws Docx4JException, JAXBException{
+        boolean save = true;
+        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile);           
+        MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+        org.docx4j.wml.Document wmlDocumentEl = (org.docx4j.wml.Document) documentPart.getJaxbElement(); 
+                            
+        //xml --> string
+        String xml = XmlUtils.marshaltoString(wmlDocumentEl, true);
+          
+        //valorize template
+        Object obj = XmlUtils.unmarshallFromTemplate(xml, nameValue);
             
         //change  JaxbElement
         documentPart.setJaxbElement((Document) obj);
