@@ -15,6 +15,7 @@ import org.docx4j.wml.Text;
 
 import com.n2napps.doctest.Field;
 import com.n2napps.doctest.FieldValues;
+import com.n2napps.doctest.utils.FieldUtils;
 
 public class FormManager extends DocManager{
     
@@ -79,7 +80,7 @@ public class FormManager extends DocManager{
                             textList.add(text);
                             if(text.getValue().indexOf("}")>=0){
                                 String fieldName = getFieldName(textList);
-                                if(!checkFieldName(fieldName,fields)){
+                                if(!FieldUtils.checkFieldName(fieldName,fields)){
                                     Field f = new Field();
                                     f.setName(fieldName);
                                     fields.add(f);
@@ -90,7 +91,7 @@ public class FormManager extends DocManager{
                             textList.add(text);
                             if(text.getValue().indexOf("}")>=0){
                                 String fieldName = getFieldName(textList);
-                                if(!checkFieldName(fieldName,fields)){
+                                if(!FieldUtils.checkFieldName(fieldName,fields)){
                                     Field f = new Field();
                                     f.setName(fieldName);
                                     fields.add(f);
@@ -257,36 +258,11 @@ public class FormManager extends DocManager{
         //xml --> string
         String s = XmlUtils.marshaltoString(wmlDocumentEl, true);
         
-        fields = getField(s,0,new StringBuilder(),fields);
+        fields = FieldUtils.getField(s,0,new StringBuilder(),fields);
         
         return fields;
         
     }
-    
-    private static List<Field> getField(String s, int offset, StringBuilder b,List<Field> fields) {
-        int startKey = s.indexOf("${", offset);
-        if (startKey == -1)
-           return fields;
-        else {
-           b.append(s.substring(offset, startKey));
-           int keyEnd = s.indexOf('}', startKey);
-           String key = s.substring(startKey + 2, keyEnd);
-           if(!checkFieldName(key,fields)){
-               Field f = new Field();
-               f.setName(key);
-               fields.add(f);
-           }
-           return getField(s, keyEnd + 1, b, fields);
-        }
-     }
-    
-    private static boolean checkFieldName(String filedName,List<Field> fields){
-        boolean isHave = false;
-        for(int i=0;i<fields.size();i++){
-            if(fields.get(i).getName().equals(filedName)){
-                isHave = true;
-            }
-        }
-        return isHave;
-    }
+   
+
 }

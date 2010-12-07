@@ -1,6 +1,9 @@
 package com.n2napps.doctest;
 
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,6 +79,24 @@ public class DocManagerSimpleTest {
         nameValue.put("icecream", "chocolate");
         
         manager.replaceValues(inputFile, outputFilePath, nameValue);
+    }
+    
+    //use the file 04_simple.docx,have ${colour} and ${icecream}
+    @Test
+    public void testIsHaveText() throws Exception {
+        //create the output folder if not exist
+        FolderUtils.newFolder("/tmp/test/DocManager/output");
+        
+        String inputFilePath = "src/test/resources/DocManager/04_simple.docx";
+      
+        File inputFile = new File(inputFilePath);
+        DocManager manager = new DocManager();
+        
+        boolean isHaveColour = manager.isHaveText(inputFile, "colour");
+        assertTrue("we have the colour in the file", isHaveColour);
+        
+        boolean isHaveName = manager.isHaveText(inputFile, "name");
+        assertFalse("we do not have the name in the file", isHaveName);
     }
 
 }

@@ -2,6 +2,7 @@ package com.n2napps.doctest.manager;
 
 import java.io.File;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,9 @@ import org.docx4j.openpackaging.io.SaveToZipFile;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.wml.Document;
+
+import com.n2napps.doctest.Field;
+import com.n2napps.doctest.utils.FieldUtils;
 
 
 
@@ -110,6 +114,37 @@ public class DocManager {
         } else {
             // Display the Main Document Part.
         }
+    }
+    
+    /***
+     * this method is to check whether have the textName in the docxFile ${textName}
+     * @param docxFile
+     * @param textName
+     * @return
+     * @throws Docx4JException
+     */
+    public boolean isHaveText(File docxFile,String textName) throws Docx4JException{
+        boolean isHave = false;
+        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile);           
+        MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+        org.docx4j.wml.Document wmlDocumentEl = (org.docx4j.wml.Document) documentPart.getJaxbElement(); 
+                            
+        //xml --> string
+        String s = XmlUtils.marshaltoString(wmlDocumentEl, true);
+        
+        List<Field> fields = new ArrayList<Field>();
+        
+        fields = FieldUtils.getField(s,0,new StringBuilder(),fields);
+        
+        if(fields.size() > 0){
+            for(int i=0;i<fields.size();i++){
+                if(textName.equals(fields.get(i).getName())){
+                    isHave = true;
+                }
+            }
+        }
+          
+        return isHave;
     }
 
 }
