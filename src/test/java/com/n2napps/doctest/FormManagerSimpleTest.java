@@ -117,5 +117,21 @@ public class FormManagerSimpleTest {
 
         manager.fillAndSave(inputFile, outputFile, fieldvalues);
     }
+    
+    //use the file 04_simple.docx,have ${colour} and ${icecream}
+    @Test
+    public void testGetAllFields() throws Docx4JException {
+        String inputFilePath = "src/test/resources/DocManager/04_simple.docx";
+      
+        File inputFile = new File(inputFilePath);
+        FormManager manager = new FormManager();
+      
+        //get fields
+        List<Field> fileds = manager.getAllFields(inputFile);
+      
+        assertEquals("fileds size is 2",2, fileds.size());
+        assertEquals("one field is colour",fileds.get(0).getName(),"colour");
+        assertEquals("other field is icecream",fileds.get(1).getName(),"icecream");
+    }
 
 }

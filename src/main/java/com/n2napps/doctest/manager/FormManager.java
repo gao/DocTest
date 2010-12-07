@@ -20,6 +20,7 @@ public class FormManager extends DocManager{
     
     /***
      * this method get the name of ${name} in the docxFile
+     * this for the 01_sample.docx the style of ${} 
      * @param docxFile
      * @return
      * @throws Docx4JException
@@ -115,15 +116,6 @@ public class FormManager extends DocManager{
                     return fieldName.substring(2, fieldName.length()-1);
                 }
                 
-                private boolean checkFieldName(String filedName,List<Field> fields){
-                    boolean isHave = false;
-                    for(int i=0;i<fields.size();i++){
-                        if(fields.get(i).getName().equals(filedName)){
-                            isHave = true;
-                        }
-                    }
-                    return isHave;
-                }
     
             }
 
@@ -247,5 +239,54 @@ public class FormManager extends DocManager{
     
         wordMLPackage.save(destinationDocxFile);
     }
-
+    
+    /***
+     * this method get the name of ${name} in the docxFile
+     * this for the 04_simple.docx the style of ${} 
+     * @param docxFile
+     * @return
+     * @throws Docx4JException
+     */
+    public List<Field> getAllFields(File docxFile) throws Docx4JException{
+        List<Field> fields = new ArrayList<Field>();
+        
+        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile);           
+        MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+        org.docx4j.wml.Document wmlDocumentEl = (org.docx4j.wml.Document) documentPart.getJaxbElement(); 
+                            
+        //xml --> string
+        String s = XmlUtils.marshaltoString(wmlDocumentEl, true);
+        
+        fields = getField(s,0,new StringBuilder(),fields);
+        
+        return fields;
+        
+    }
+    
+    private static List<Field> getField(String s, int offset, StringBuilder b,List<Field> fields) {
+        int startKey = s.indexOf("${", offset);
+        if (startKey == -1)
+           return fields;
+        else {
+           b.append(s.substring(offset, startKey));
+           int keyEnd = s.indexOf('}', startKey);
+           String key = s.substring(startKey + 2, keyEnd);
+           if(!checkFieldName(key,fields)){
+               Field f = new Field();
+               f.setName(key);
+               fields.add(f);
+           }
+           return getField(s, keyEnd + 1, b, fields);
+        }
+     }
+    
+    private static boolean checkFieldName(String filedName,List<Field> fields){
+        boolean isHave = false;
+        for(int i=0;i<fields.size();i++){
+            if(fields.get(i).getName().equals(filedName)){
+                isHave = true;
+            }
+        }
+        return isHave;
+    }
 }
